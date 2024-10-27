@@ -38,6 +38,7 @@ void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t *
         data.out.typeChar = message;
         data.out.typeString = String(message);
         data.out.typeInt = String(message).toInt();
+        data.out.typeDouble = String(message).toDouble();
 
         if (error) {
             data.statusCode = 1;
