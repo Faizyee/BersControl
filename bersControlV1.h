@@ -19,6 +19,7 @@ struct Output {
     const char* typeChar;
     String typeString;
     int typeInt;
+    double typeDouble;
 };
 
 struct BersData {
