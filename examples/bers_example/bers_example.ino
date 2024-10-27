@@ -11,6 +11,17 @@
 bersControlV1 mycontrol;
 
 void onEventBersControl(const BersData& data) {
+  // For get client id
+  if (data.getClientID == 0) {
+    // For send message to client
+    mycontrol.sendClient(data.getClientID, "Hello first client!");
+    // For get IP client
+    mycontrol.sendClient(data.getClientID, "your IP is " + data.getIPClient);
+  } else {
+    // For disconnect client
+    mycontrol.clientDisconnect(data.getClientID);
+  }
+
   // For get status code
   Serial.print("statusCode : ");
   Serial.println(String(data.statusCode));
@@ -38,6 +49,10 @@ void onEventBersControl(const BersData& data) {
   // For get type int from data if data is numerical
   Serial.print("typeInt : ");
   Serial.println(String(data.out.typeInt));
+
+  // For get type double from data if data is numerical
+  Serial.print("typeDouble : ");
+  Serial.println(String(data.out.typeDouble));
 }
 
 void setup() {
