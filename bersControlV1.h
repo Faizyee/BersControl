@@ -26,6 +26,8 @@ struct BersData {
     Output out;
     int statusCode;
     String statusMessage;
+    int getClientID;
+    String getIPClient;
 };
 
 typedef void (*EventCallback)(const BersData& data);
@@ -36,6 +38,8 @@ public:
     void begin(const char* ssid, const char* password);
     void setPort(const int port);
     void onEvent(EventCallback callback);
+    void sendClient(int clientID, String message);
+    void clientDisconnect(int clientID);
     void loop();
     const char* getIPAddress();
 private:
