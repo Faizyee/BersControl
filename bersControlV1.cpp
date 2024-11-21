@@ -58,12 +58,16 @@ const char* bersControlV1::getIPAddress() {
 
 void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
     if (type == WStype_DISCONNECTED) {
-        curC--;
+        if (maxC > 0) {
+            curC--;
+        }
     }
     if (type == WStype_CONNECTED) {
-        curC++;
-        if (curC > maxC) {
-            webSocket.disconnect(num);
+        if (maxC > 0) {
+            curC++;
+            if (curC > maxC) {
+                webSocket.disconnect(num);
+            }
         }
     }
     if (type == WStype_TEXT) {
