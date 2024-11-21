@@ -70,15 +70,15 @@ void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t *
         BersSignal data;
         data.status.code = 0;
         data.status.message = "Json format is true, you can use .out.typeJson or .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
-        data.client.id = (int)num;
-        data.client.ip = webSocket.remoteIP(num).toString();
+        data.client.ID = (int)num;
+        data.client.IP = webSocket.remoteIP(num).toString();
         JsonDocument doc;
         const char* message = (const char*)payload;
         
-        data.output.char = (char)message;
-        data.output.string = String(message);
-        data.output.int = String(message).toInt();
-        data.output.double = String(message).toDouble();
+        data.output.Char = (char)message;
+        data.output.Str = String(message);
+        data.output.Int = String(message).toInt();
+        data.output.Dec = String(message).toDouble();
         DeserializationError error = deserializeJson(doc, message);
 
         if (error) {
@@ -91,7 +91,7 @@ void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t *
         }
 
 
-        data.output.json = doc;
+        data.output.Json = doc;
         if (eventCallback) {
             eventCallback(data);
         }
