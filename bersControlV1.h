@@ -20,7 +20,7 @@ struct Client {
 }
 
 struct Output {
-    JsonDocument json;
+    JsonDocument Json;
     char Char;
     String Str;
     int Int;
@@ -28,8 +28,8 @@ struct Output {
 };
 
 struct Status {
-    int code;
-    String message;
+    int Code;
+    String Message;
 };
 
 struct BersSignal {
