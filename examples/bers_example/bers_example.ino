@@ -32,7 +32,7 @@ void onEventBersControl(const BersSignal& data) {
 
   if (data.status.code == 0) {
     // For get Json data
-    JsonDocument jsonData = data.out.json;
+    JsonDocument jsonData = data.output.json;
     String output = jsonData["data"]["output"]["other"].as<String>();
     Serial.print("typeJson : ");
     Serial.println(output);
@@ -40,19 +40,19 @@ void onEventBersControl(const BersSignal& data) {
 
   // For get type char from data
   Serial.print("typeChar : ");
-  Serial.println(String(data.out.char));
+  Serial.println(String(data.output.char));
 
   // For get type string from data
   Serial.print("typeString : ");
-  Serial.println(data.out.string);
+  Serial.println(data.output.string);
 
   // For get type int from data if data is numerical
   Serial.print("typeInt : ");
-  Serial.println(String(data.out.int));
+  Serial.println(String(data.output.int));
 
   // For get type double from data if data is numerical
   Serial.print("typeDouble : ");
-  Serial.println(String(data.out.double));
+  Serial.println(String(data.output.double));
 }
 
 void setup() {
