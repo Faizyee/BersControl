@@ -14,12 +14,22 @@
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
 
+struct Client {
+    int id;
+    string ip;
+}
+
 struct Output {
     JsonDocument typeJson;
     const char* typeChar;
     String typeString;
     int typeInt;
     double typeDouble;
+};
+
+struct Status {
+    int code;
+    String message;
 };
 
 struct BersData {
@@ -37,7 +47,7 @@ public:
     bersControlV1();
     void begin(const char* ssid, const char* password);
     void setPort(const int port);
-    voidssetMaxConnect(const int maxc);
+    void setMaxConnect(const int maxc);
     void onEvent(EventCallback callback);
     void sendClient(int clientID, String message);
     void clientDisconnect(int clientID);
@@ -47,6 +57,7 @@ private:
     WebSocketsServer webSocket;
     EventCallback eventCallback;
     int maxC, curC;
+    bool modeAP;
     IPAddress localIP;
     void handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
 };
