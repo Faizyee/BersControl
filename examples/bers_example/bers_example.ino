@@ -10,7 +10,7 @@
 
 bersControlV1 mycontrol;
 
-void onEventBersControl(const BersData& data) {
+void onEventBersControl(const BersSignal& data) {
   // For get client id
   if (data.client.id == 0) {
     // For send message to client
