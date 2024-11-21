@@ -16,7 +16,7 @@ void onEventBersControl(const BersData& data) {
     // For send message to client
     mycontrol.sendClient(data.client.id, "Hello first client!");
     // For get IP client
-    mycontrol.sendClient(data.client.ip, "your IP is " + data.getIPClient);
+    mycontrol.sendClient(data.client.id, "your IP is " + data.client.ip);
   } else {
     // For disconnect client
     mycontrol.clientDisconnect(data.client.id);
