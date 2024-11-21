@@ -15,16 +15,16 @@
 #include <ArduinoJson.h>
 
 struct Client {
-    int id;
-    String ip;
+    int ID;
+    String IP;
 }
 
 struct Output {
     JsonDocument json;
-    char char;
-    String string;
-    int int;
-    double double;
+    char Char;
+    String Str;
+    int Int;
+    double Dec;
 };
 
 struct Status {
