@@ -2,15 +2,20 @@
 
 bersControlV1::bersControlV1() : webSocket(81), eventCallback(nullptr) {}
 
-void bersControlV1::begin(const char* ssid, const char* password, const bool modeap) {
-    modeAP = modeap;
+void bersControlV1::begin(const char* ssid, const char* password, const bool ap) {
+    modeAP = ap;
     if (modeAP) {
         WiFi.softAP(ssid, password);
     } else {
         WiFi.begin(ssid, password);
-        while() {
-
+        pinMode(LED_BUILTIN, OUTPUT);
+        while(WiFi.status() != WL_CONNECTED) {
+           digitalWrite(LED_BUILTIN, HIGH);
+           delay(200);
+           digitalWrite(LED_BUILTIN, LOW);
+           delay(200);
         }
+        pinMode(LED_BUILTIN, INPUT);
     }
     webSocket.begin();
     webSocket.onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
