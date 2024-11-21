@@ -2,8 +2,16 @@
 
 bersControlV1::bersControlV1() : webSocket(81), eventCallback(nullptr) {}
 
-void bersControlV1::begin(const char* ssid, const char* password) {
-    WiFi.softAP(ssid, password);
+void bersControlV1::begin(const char* ssid, const char* password, const bool modeap) {
+    modeAP = modeap;
+    if (modeAP) {
+        WiFi.softAP(ssid, password);
+    } else {
+        WiFi.begin(ssid, password);
+        while() {
+
+        }
+    }
     webSocket.begin();
     webSocket.onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
         handleWebSocketMessage(num, type, payload, length);
@@ -35,40 +43,49 @@ void bersControlV1::loop() {
 }
 
 const char* bersControlV1::getIPAddress() {
-    localIP = WiFi.softAPIP();
+    if (modeAP) {
+        localIP = WiFi.softAPIP();
+    } else {
+        localIP = Wifi.getIP();
+    }
     return localIP.toString().c_str();
 }
 
 void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+    if (type == WStype_DISCONNECTED) {
+        curC--;
+    }
     if (type == WStype_CONNECTED) {
-        if (maxC) {
-
+        curC++;
+        if (curC > maxC) {
+            webSocket.disconnect(num);
         }
     }
     if (type == WStype_TEXT) {
         BersSignal data;
-        data.statusCode = 0;
-        data.statusMessage = "Json format is true, you can use .out.typeJson or .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
-        data.getClientID = num;
-        data.getIPClient = webSocket.remoteIP(num).toString();
+        data.status.code = 0;
+        data.status.message = "Json format is true, you can use .out.typeJson or .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
+        data.get.id = num;
+        data.get.ip = webSocket.remoteIP(num).toString();
         JsonDocument doc;
         const char* message = (const char*)payload;
         DeserializationError error = deserializeJson(doc, message);
-        data.out.typeChar = message;
-        data.out.typeString = String(message);
-        data.out.typeInt = String(message).toInt();
-        data.out.typeDouble = String(message).toDouble();
 
         if (error) {
-            data.statusCode = 1;
-            data.statusMessage = "Json format is false, you can use .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
+            data.status.code = 1;
+            data.status.message = "Json format is false, you can use .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
             if (eventCallback) {
                 eventCallback(data);
             }
             return;
         }
 
-        data.out.typeJson = doc;
+        data.out.char = message;
+        data.out.string = String(message);
+        data.out.int = String(message).toInt();
+        data.out.double = String(message).toDouble();
+
+        data.out.json = doc;
         if (eventCallback) {
             eventCallback(data);
         }
