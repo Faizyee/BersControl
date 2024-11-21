@@ -38,7 +38,7 @@ struct BersData {
     Status status;
 };
 
-typedef void (*EventCallback)(const BersData& data);
+typedef void (*EventCallback)(const BersSignal& data);
 
 class bersControlV1 {
 public:
