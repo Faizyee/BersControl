@@ -37,6 +37,7 @@ public:
     bersControlV1();
     void begin(const char* ssid, const char* password);
     void setPort(const int port);
+    voidssetMaxConnect(const int maxc);
     void onEvent(EventCallback callback);
     void sendClient(int clientID, String message);
     void clientDisconnect(int clientID);
@@ -45,6 +46,7 @@ public:
 private:
     WebSocketsServer webSocket;
     EventCallback eventCallback;
+    int maxC, curC;
     IPAddress localIP;
     void handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
 };
