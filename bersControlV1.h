@@ -43,7 +43,7 @@ typedef void (*EventCallback)(const BersSignal& data);
 class bersControlV1 {
 public:
     bersControlV1();
-    void begin(const char* ssid, const char* password);
+    void begin(const char* ssid, const char* password, const bool ap);
     void setPort(const int port);
     void setMaxConnect(const int maxc);
     void onEvent(EventCallback callback);
