@@ -16,7 +16,7 @@
 
 struct Client {
     int id;
-    IPAddress ip;
+    String ip;
 }
 
 struct Output {
