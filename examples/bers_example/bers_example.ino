@@ -12,27 +12,27 @@ bersControlV1 mycontrol;
 
 void onEventBersControl(const BersData& data) {
   // For get client id
-  if (data.getClientID == 0) {
+  if (data.client.id == 0) {
     // For send message to client
-    mycontrol.sendClient(data.getClientID, "Hello first client!");
+    mycontrol.sendClient(data.client.id, "Hello first client!");
     // For get IP client
-    mycontrol.sendClient(data.getClientID, "your IP is " + data.getIPClient);
+    mycontrol.sendClient(data.client.ip, "your IP is " + data.getIPClient);
   } else {
     // For disconnect client
-    mycontrol.clientDisconnect(data.getClientID);
+    mycontrol.clientDisconnect(data.client.id);
   }
 
   // For get status code
   Serial.print("statusCode : ");
-  Serial.println(String(data.statusCode));
+  Serial.println(String(data.status.code));
 
   // For get status message
   Serial.print("statusMessage : ");
-  Serial.println(data.statusMessage);
+  Serial.println(data.status.message);
 
-  if (data.statusCode == 0) {
+  if (data.status.code == 0) {
     // For get Json data
-    JsonDocument jsonData = data.out.typeJson;
+    JsonDocument jsonData = data.out.json;
     String output = jsonData["data"]["output"]["other"].as<String>();
     Serial.print("typeJson : ");
     Serial.println(output);
@@ -40,19 +40,19 @@ void onEventBersControl(const BersData& data) {
 
   // For get type char from data
   Serial.print("typeChar : ");
-  Serial.println(String(data.out.typeChar));
+  Serial.println(String(data.out.char));
 
   // For get type string from data
   Serial.print("typeString : ");
-  Serial.println(data.out.typeString);
+  Serial.println(data.out.string);
 
   // For get type int from data if data is numerical
   Serial.print("typeInt : ");
-  Serial.println(String(data.out.typeInt));
+  Serial.println(String(data.out.int));
 
   // For get type double from data if data is numerical
   Serial.print("typeDouble : ");
-  Serial.println(String(data.out.typeDouble));
+  Serial.println(String(data.out.double));
 }
 
 void setup() {
@@ -60,6 +60,7 @@ void setup() {
     // Set your WiFi SSID and Password
     mycontrol.begin("RobotikaBers", "robotikabers");
     // Default port is 81, you can change port with mycontrol.setPort(port);
+    // You can set max connection with mycontrol.setMaxConnect(1); for set max connect to 1
     
     // For get IP Address
     Serial.print("IP Address : ");
