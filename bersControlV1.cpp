@@ -72,18 +72,20 @@ void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t *
         data.status.message = "Json format is true, you can use .out.typeJson or .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
         data.client.ID = (int)num;
         data.client.IP = webSocket.remoteIP(num).toString();
-        JsonDocument doc;
+
         const char* message = (const char*)payload;
-        
         data.output.Char = (char)message;
         data.output.Str = String(message);
         data.output.Int = String(message).toInt();
         data.output.Dec = String(message).toDouble();
+
+        JsonDocument doc;
+
         DeserializationError error = deserializeJson(doc, message);
 
         if (error) {
-            data.status.code = 1;
-            data.status.message = "Json format is false, you can use .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
+            data.status.Code = 1;
+            data.status.Message = "Json format is false, you can use .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
             if (eventCallback) {
                 eventCallback(data);
             }
