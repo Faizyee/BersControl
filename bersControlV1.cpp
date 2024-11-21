@@ -51,7 +51,7 @@ const char* bersControlV1::getIPAddress() {
     if (modeAP) {
         localIP = WiFi.softAPIP();
     } else {
-        localIP = Wifi.getIP();
+        localIP = WiFi.localIP();
     }
     return localIP.toString().c_str();
 }
@@ -68,13 +68,13 @@ void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t *
     }
     if (type == WStype_TEXT) {
         BersSignal data;
-        data.status.code = 0;
-        data.status.message = "Json format is true, you can use .out.typeJson or .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
+        data.status.Code = 0;
+        data.status.Message = "Json format is true, you can use .out.typeJson or .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
         data.client.ID = (int)num;
         data.client.IP = webSocket.remoteIP(num).toString();
 
         const char* message = (const char*)payload;
-        data.output.Char = (char)message;
+        data.output.Char = (char*)message;
         data.output.Str = String(message);
         data.output.Int = String(message).toInt();
         data.output.Dec = String(message).toDouble();
