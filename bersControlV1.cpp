@@ -37,7 +37,7 @@ const char* bersControlV1::getIPAddress() {
 
 void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
     if (type == WStype_TEXT) {
-        BersData data;
+        BersSignal data;
         data.statusCode = 0;
         data.statusMessage = "Json format is true, you can use .out.typeJson or .out.typeChar , .out.typeString (if want to use char or string) or .out.typeInt for Int";
         data.getClientID = num;
