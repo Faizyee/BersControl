@@ -32,7 +32,7 @@ struct Status {
     String message;
 };
 
-struct BersData {
+struct BersSignal {
     Client client;
     Output output;
     Status status;
