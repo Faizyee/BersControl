@@ -58,7 +58,7 @@ void onEventBersControl(const BersSignal& data) {
 void setup() {
     Serial.begin(115200);
     // Set your WiFi SSID and Password
-    mycontrol.begin("RobotikaBers", "robotikabers");
+    mycontrol.begin("RobotikaBers", "robotikabers", true);
     // Default port is 81, you can change port with mycontrol.setPort(port);
     // You can set max connection with mycontrol.setMaxConnect(1); for set max connect to 1
     
