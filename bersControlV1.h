@@ -14,7 +14,7 @@
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
 
-struct Client {
+struct ClientOut {
     int ID;
     String IP;
 }
@@ -33,7 +33,7 @@ struct Status {
 };
 
 struct BersSignal {
-    Client client;
+    ClientOut client;
     Output output;
     Status status;
 };
