@@ -30,7 +30,7 @@ void onEventBersControl(const BersSignal& data) {
   Serial.print("statusMessage : ");
   Serial.println(data.status.Message);
 
-  if (data.status.code == 0) {
+  if (data.status.Code == 0) {
     // For get Json data
     JsonDocument jsonData = data.output.Json;
     String output = jsonData["data"]["output"]["other"].as<String>();
