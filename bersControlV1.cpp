@@ -14,6 +14,10 @@ void bersControlV1::setPort(const int port) {
     webSocket = WebSocketsServer(port);
 }
 
+void bersControlV1::setMaxConnect(const int maxc) {
+    maxC = maxc;
+}
+
 void bersControlV1::onEvent(EventCallback callback) {
     eventCallback = callback;
 }
@@ -36,6 +40,11 @@ const char* bersControlV1::getIPAddress() {
 }
 
 void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+    if (type == WStype_CONNECTED) {
+        if (maxC) {
+
+        }
+    }
     if (type == WStype_TEXT) {
         BersSignal data;
         data.statusCode = 0;
