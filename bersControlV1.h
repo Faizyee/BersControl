@@ -33,11 +33,9 @@ struct Status {
 };
 
 struct BersData {
-    Output out;
-    int statusCode;
-    String statusMessage;
-    int getClientID;
-    String getIPClient;
+    Client client;
+    Output output;
+    Status status;
 };
 
 typedef void (*EventCallback)(const BersData& data);
