@@ -20,11 +20,11 @@ struct Client {
 }
 
 struct Output {
-    JsonDocument typeJson;
-    const char* typeChar;
-    String typeString;
-    int typeInt;
-    double typeDouble;
+    JsonDocument json;
+    char char;
+    String string;
+    int int;
+    double double;
 };
 
 struct Status {
