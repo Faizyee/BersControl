@@ -21,7 +21,7 @@ struct ClientOut {
 
 struct Output {
     JsonDocument Json;
-    char Char;
+    char* Char;
     String Str;
     int Int;
     double Dec;
