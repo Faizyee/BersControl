@@ -17,7 +17,7 @@
 struct ClientOut {
     int ID;
     String IP;
-}
+};
 
 struct Output {
     JsonDocument Json;
