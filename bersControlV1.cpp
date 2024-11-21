@@ -85,12 +85,12 @@ void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t *
             return;
         }
 
-        data.out.char = message;
-        data.out.string = String(message);
-        data.out.int = String(message).toInt();
-        data.out.double = String(message).toDouble();
+        data.output.char = message;
+        data.output.string = String(message);
+        data.output.int = String(message).toInt();
+        data.output.double = String(message).toDouble();
 
-        data.out.json = doc;
+        data.output.json = doc;
         if (eventCallback) {
             eventCallback(data);
         }
