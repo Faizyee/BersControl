@@ -74,6 +74,11 @@ void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t *
         data.client.ip = webSocket.remoteIP(num).toString();
         JsonDocument doc;
         const char* message = (const char*)payload;
+        
+        data.output.char = (char)message;
+        data.output.string = String(message);
+        data.output.int = String(message).toInt();
+        data.output.double = String(message).toDouble();
         DeserializationError error = deserializeJson(doc, message);
 
         if (error) {
@@ -85,10 +90,6 @@ void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t *
             return;
         }
 
-        data.output.char = (char)message;
-        data.output.string = String(message);
-        data.output.int = String(message).toInt();
-        data.output.double = String(message).toDouble();
 
         data.output.json = doc;
         if (eventCallback) {
