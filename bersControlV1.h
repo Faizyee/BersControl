@@ -2,7 +2,6 @@
 #define BERS_CONTROL_V1_H
 
 #include <ESP8266WiFi.h>
-#include <ESP8266WiFiMulti.h>
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
 #include <Hash.h>
