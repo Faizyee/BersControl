@@ -7,9 +7,9 @@ void bersControlV1::begin(const char* ssid, const char* password, const bool ap)
     if (modeAP) {
         WiFi.softAP(ssid, password);
     } else {
-        WiFi.begin(ssid, password);
+        WiFiMulti.addAP(ssid, password);
         pinMode(LED_BUILTIN, OUTPUT);
-        while(WiFi.status() != WL_CONNECTED) {
+        while(WiFiMulti.run() != WL_CONNECTED) {
            digitalWrite(LED_BUILTIN, HIGH);
            delay(200);
            digitalWrite(LED_BUILTIN, LOW);
@@ -47,7 +47,7 @@ void bersControlV1::loop() {
     if (modeAP) {
         webSocket.loop();
     } else {
-        if (WiFi.status() != WL_CONNECTED) {
+        if (WiFiMulti.run() != WL_CONNECTED) {
             ESP.restart();
         }
     }
