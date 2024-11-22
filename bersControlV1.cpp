@@ -44,16 +44,22 @@ void bersControlV1::clientDisconnect(int clientID) {
 }
 
 void bersControlV1::loop() {
-    webSocket.loop();
+    if (modeAP) {
+        webSocket.loop();
+    } else {
+        if (WiFi.status() != WL_CONNECTED) {
+            ESP.restart();
+        }
+    }
 }
 
-const char* bersControlV1::getIPAddress() {
+const String bersControlV1::getIPAddress() {
     if (modeAP) {
         localIP = WiFi.softAPIP();
     } else {
         localIP = WiFi.localIP();
     }
-    return localIP.toString().c_str();
+    return localIP.toString();
 }
 
 void bersControlV1::handleWebSocketMessage(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
