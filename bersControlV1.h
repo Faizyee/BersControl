@@ -1,16 +1,6 @@
 #ifndef BERS_CONTROL_V1_H
 #define BERS_CONTROL_V1_H
 
-#if !defined(ESP32) && !defined(ESP8266)
-#error "Platform not supported. Please define either ESP32 or ESP8266."
-#endif
-
-#ifdef ESP32
-#include <WiFi.h>
-#elif defined(ESP8266)
-#include <ESP8266WiFi.h>
-#endif
-
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
 
