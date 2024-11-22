@@ -40,7 +40,7 @@ public:
     void sendClient(int clientID, String message);
     void clientDisconnect(int clientID);
     void loop();
-    const char* getIPAddress();
+    const String getIPAddress();
 private:
     WebSocketsServer webSocket;
     EventCallback eventCallback;
