@@ -4,7 +4,6 @@
 #include <ESP8266WiFi.h>
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
-#include <Hash.h>
 
 struct ClientOut {
     int ID;
