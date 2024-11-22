@@ -1,8 +1,11 @@
 #ifndef BERS_CONTROL_V1_H
 #define BERS_CONTROL_V1_H
 
+#include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
+#include <Hash.h>
 
 struct ClientOut {
     int ID;
@@ -42,6 +45,7 @@ public:
     void loop();
     const String getIPAddress();
 private:
+	ESP8266WiFiMulti WiFiMulti;
     WebSocketsServer webSocket;
     EventCallback eventCallback;
     int maxC, curC;
