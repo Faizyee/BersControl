@@ -6,7 +6,6 @@ void bersControlV1::begin(const char* ssid, const char* password, const bool ap)
     modeAP = ap;
     if (modeAP) {
         WiFi.mode(AP);
-        WiFi.setOutputPower(20);
         WiFi.softAP(ssid, password);
     } else {
         WiFi.mode(STA);
@@ -20,6 +19,7 @@ void bersControlV1::begin(const char* ssid, const char* password, const bool ap)
         }
         pinMode(LED_BUILTIN, INPUT);
     }
+    WiFi.setOutputPower(20);
     webSocket.begin();
     webSocket.onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
         handleWebSocketMessage(num, type, payload, length);
