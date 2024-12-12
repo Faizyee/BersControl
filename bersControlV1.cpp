@@ -5,16 +5,14 @@ bersControlV1::bersControlV1() : webSocket(81), eventCallback(nullptr) {}
 void bersControlV1::begin(const char* ssid, const char* password, const bool ap) {
     modeAP = ap;
     if (modeAP) {
-        WiFi.mode(AP);
+        WiFi.mode(WIFI_AP);
         WiFi.softAP(ssid, password);
     } else {
-        WiFi.mode(STA);
+        WiFi.mode(WIFI_STA);
         WiFi.begin(ssid, password);
-        pinMode(LED_BUILTIN, OUTPUT);
         while(WiFi.status() != WL_CONNECTED) {
-           digitalWrite(LED_BUILTIN, HIGH);
-           delay(200);
-           digitalWrite(LED_BUILTIN, LOW);
+           pinMode(LED_BUILTIN, OUTPUT);
+           pinMode(LED_BUILTIN, LOW);
            delay(200);
         }
         pinMode(LED_BUILTIN, INPUT);
