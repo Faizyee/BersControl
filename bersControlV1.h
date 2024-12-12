@@ -43,7 +43,6 @@ public:
     void loop();
     const String getIPAddress();
 private:
-	ESP8266WiFiMulti WiFiMulti;
     WebSocketsServer webSocket;
     EventCallback eventCallback;
     int maxC, curC;
